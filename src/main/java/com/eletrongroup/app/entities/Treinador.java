@@ -2,8 +2,8 @@ package com.eletrongroup.app.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,7 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 
-
+@Entity
+@Table(name = "treinador")
 public class Treinador implements Serializable{
 	/**
 	 * 
@@ -20,18 +21,19 @@ public class Treinador implements Serializable{
 	
 	private Long id;
 	private String nome;
+	@Column(name="data_nascimento")
 	private Date dataNascimento;
-	private List <Pokemon> pokemons;
-	private Pokemon inicial;
-	private Date comecoComoTreinaor;
+	@Column(name="inicial")
+	private int inicial;
+	@Column(name="comeco_como_treinador")
+	private Date comecoComoTreinador;
 	
 	public Treinador() {
 		
 	}
-	public Treinador(String nome, Date dataNascimento, Pokemon inicial){
+	public Treinador(String nome, Date dataNascimento){
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
-		this.inicial = inicial;
 	}
 	
 	@Id
@@ -54,22 +56,17 @@ public class Treinador implements Serializable{
 	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-	public List<Pokemon> getPokemons() {
-		return pokemons;
-	}
-	public void setPokemons(List<Pokemon> pokemons) {
-		this.pokemons = pokemons;
-	}
-	public Pokemon getInicial() {
+	
+	public int getInicial() {
 		return inicial;
 	}
-	public void setInicial(Pokemon inicial) {
+	public void setInicial(int inicial) {
 		this.inicial = inicial;
 	}
 	public Date getComecoComoTreinaor() {
-		return comecoComoTreinaor;
+		return comecoComoTreinador;
 	}
 	public void setComecoComoTreinaor(Date comecoComoTreinaor) {
-		this.comecoComoTreinaor = comecoComoTreinaor;
+		this.comecoComoTreinador = comecoComoTreinaor;
 	}
 }
