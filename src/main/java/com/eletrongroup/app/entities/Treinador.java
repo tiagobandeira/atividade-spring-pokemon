@@ -2,12 +2,17 @@ package com.eletrongroup.app.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 
@@ -18,11 +23,19 @@ public class Treinador implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -11891671776602233L;
-	
+	 
 	private Long id;
 	private String nome;
 	@Column(name="data_nascimento")
 	private Date dataNascimento;
+	
+	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "treinador_pokemon",
+	joinColumns = {@JoinColumn(name = "treinador_id", referencedColumnName = "id")},
+	inverseJoinColumns = {@JoinColumn(name = "pokemon_id", referencedColumnName = "id")})
+	private List<Pokemon> pokemons;
+	
 	@Column(name="inicial")
 	private int inicial;
 	@Column(name="comeco_como_treinador")
@@ -57,16 +70,19 @@ public class Treinador implements Serializable{
 		this.dataNascimento = dataNascimento;
 	}
 	
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	public int getInicial() {
 		return inicial;
 	}
 	public void setInicial(int inicial) {
 		this.inicial = inicial;
 	}
-	public Date getComecoComoTreinaor() {
+	public Date getComecoComoTreinador() {
 		return comecoComoTreinador;
 	}
-	public void setComecoComoTreinaor(Date comecoComoTreinaor) {
+	public void setComecoComoTreinador(Date comecoComoTreinaor) {
 		this.comecoComoTreinador = comecoComoTreinaor;
 	}
 }

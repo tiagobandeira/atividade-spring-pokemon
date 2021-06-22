@@ -13,5 +13,7 @@ public interface TreinadorRepository extends CrudRepository<Treinador, Long> {
 	
 	//public Pokemon pokemonInicial();
 	//public List<Pokemon> listPokemons(Long id);
+	public Treinador getTreinadorById(Long id);
+	
 
 }

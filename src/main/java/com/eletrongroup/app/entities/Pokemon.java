@@ -1,12 +1,14 @@
 package com.eletrongroup.app.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import com.eletrongroup.app.enums.TipoPokemon;
@@ -26,6 +28,9 @@ public class Pokemon implements Serializable{
 	private TipoPokemon tipo;
 	private String prevolution;
 	private String evolution;
+	
+	@ManyToMany(mappedBy = "pokemons")
+	private List<Treinador> treinadores;
 	
 	@Column(name="is_lendario")
 	private boolean isLendario = false;
