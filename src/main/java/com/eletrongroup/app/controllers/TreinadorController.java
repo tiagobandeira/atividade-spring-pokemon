@@ -33,17 +33,20 @@ public class TreinadorController {
     public Treinador find(@PathVariable Long id) {
         return treinadorService.getTreinador(id);
     }
+
 	@GetMapping("/byAge/{age}")
 	public List<Treinador> getByAge(@PathVariable Long age){
 		return treinadorService.getTreinadorByAge(age);
 	}
+
 	@GetMapping("/byAll")
 	public List<String> getAll(){
 		return treinadorService.getAllTreinador();
 	}
+
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> delete(@PathVariable("id") Long id ){
-		return treinadorService.deleteTreinador(id);
+	public void delete(@PathVariable("id") Long id ){
+		treinadorService.deleteTreinador(id);
 	}
 
 }
