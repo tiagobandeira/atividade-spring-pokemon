@@ -7,5 +7,6 @@ import com.eletrongroup.app.entities.Pokemon;
 
 @Repository
 public interface PokemonRepository extends CrudRepository <Pokemon, Long> {
+    public Pokemon getPokemonById(Long id);
 
 }

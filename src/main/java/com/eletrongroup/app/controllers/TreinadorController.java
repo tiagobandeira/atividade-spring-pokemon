@@ -2,16 +2,11 @@ package com.eletrongroup.app.controllers;
 
 import java.util.List;
 
+import com.eletrongroup.app.dtos.PokemonDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.eletrongroup.app.dtos.TreinadorDTO;
 import com.eletrongroup.app.entities.Treinador;
@@ -25,12 +20,18 @@ public class TreinadorController {
 	private TreinadorService treinadorService;
 	
 	@PostMapping
-	public ResponseEntity<Treinador> save(@RequestBody TreinadorDTO dto) {
+	@ResponseStatus(HttpStatus.CREATED)
+	public Treinador save(@RequestBody TreinadorDTO dto) {
 		Treinador treinador = treinadorService.saveTreinador(dto);
-		return new ResponseEntity<>(treinador, HttpStatus.CREATED);
+		return treinador;
 	}
+	@PutMapping("/{id}")
+	public void update(@PathVariable Long id, @RequestBody TreinadorDTO dto){
+		treinadorService.updateTreinador(id, dto);
+	}
+
 	@GetMapping("/{id}")
-    public Treinador find(@PathVariable Long id) {
+    public Treinador get(@PathVariable Long id) {
         return treinadorService.getTreinador(id);
     }
 

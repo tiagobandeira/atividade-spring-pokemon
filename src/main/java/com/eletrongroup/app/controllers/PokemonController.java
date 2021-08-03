@@ -20,4 +20,19 @@ public class PokemonController {
 	public Pokemon save(@RequestBody PokemonDTO dto) {
 		return pokemonService.savePokemon(dto);
 	}
+
+	@GetMapping("/{id}")
+	public Pokemon get(@PathVariable Long id){
+		return pokemonService.getPokemon(id);
+	}
+
+	@PutMapping("/{id}")
+	public void update(@PathVariable("id") Long id, @RequestBody PokemonDTO dto){
+		pokemonService.updatePokemon(id, dto);
+	}
+
+	@DeleteMapping("/{id}")
+	public void delete(@PathVariable Long id){
+		pokemonService.deletePokemon(id);
+	}
 }

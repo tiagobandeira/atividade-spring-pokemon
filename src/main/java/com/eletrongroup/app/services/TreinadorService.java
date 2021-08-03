@@ -24,9 +24,19 @@ public class TreinadorService {
         return treinadorRepository.save(dto.converterParaTreinador());
     }
 
+    public void updateTreinador(Long id, TreinadorDTO dto){
+        Treinador treinador = getTreinador(id);
+        Treinador response = dto.converterParaTreinador();
+
+        treinador.setNome(response.getNome());
+        treinador.setDataNascimento(response.getDataNascimento());
+
+        treinadorRepository.save(treinador);
+    }
+
     public void deleteTreinador(Long id) {
         Treinador treinador = getTreinador(id);
-        treinadorRepository.getTreinadorById(id);
+        treinadorRepository.delete(treinador);
     }
 
     public Treinador getTreinador(Long id) {
