@@ -1,5 +1,6 @@
 package com.eletrongroup.app.services;
 
+import com.eletrongroup.app.enums.TipoPokemon;
 import com.eletrongroup.app.exception.NotFoudException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.eletrongroup.app.dtos.PokemonDTO;
 import com.eletrongroup.app.entities.Pokemon;
 import com.eletrongroup.app.repositories.PokemonRepository;
+
+import java.util.List;
 
 @Service
 public class PokemonService {
@@ -41,5 +44,13 @@ public class PokemonService {
 			throw new NotFoudException();
 		}
 		return pokemon;
+	}
+
+	public List<Pokemon> getPokemonByTipo(String tipo){
+		TipoPokemon tipoPokemon = TipoPokemon.valueOf(tipo);
+		return pokemonRepository.getPokemonByTipo(tipoPokemon);
+	}
+	public List<Pokemon> getPokemonByGeracao(int geracao){
+		return pokemonRepository.getPokemonByGeracao(geracao);
 	}
 }
